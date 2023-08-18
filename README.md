@@ -8,7 +8,8 @@
 <p>3. my information change</p>
 <br>
 <h3>Server</h3>
-<p>1. login management (Password encryption)</p>
-<p>2. logout (session management, auto-logout after a certain amount of time)</p>
-<p>3. client information change(management of connection bewteen client-server database)</p>
-<p>3. Administrator page(User search by category, User ban)</p>
+<p>1. login management (password encryption)</p>
+<p>2. password encryption(stored password is encrypted in database)</p>
+<p>3. logout (session management, auto-logout after a certain amount of time)</p>
+<p>4. client information change(management of connection bewteen client-server database)</p>
+<p>5. Administrator page(User search algorithm by gender, enroll date, age, userid etc, User ban)</p>
