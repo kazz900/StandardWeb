@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <style type="text/css">
+        table th {
+            background-color: #9ff;
+        }
+
+        table#outer {
+            border: 2px solid navy;
+        }
+    </style>
+    <script type="text/javascript" src="/first/resources/js/jQuery/code.jquery.com_jquery-3.7.0.js"></script>
+    <script type="text/javascript">
+        //전송 보내기 전에 입력값들 유효한 값인지 확인용 함수
+        function validate() {
+            // '암호'와 '암호확인'이 일치하는지 확인
+            // var pwdValue = document.getElementById('userpwd').value;
+            // var pwdValue2 = document.getElementById('userpwd2').value;
+            var pwdValue = $('input#userpwd').val();
+            var pwdValue2 = $('input#userpwd2').val();
+
+            if(pwdValue !== pwdValue2){ // !==는 value와 datatype 일치까지 확인한다
+                alert('암호를 다시 확인 해주세요.')
+                document.getElementById('userpwd2').value = '';
+                document.getElementById('userpwd2').select();
+                return false;
+            }
+
+            // 아이디의 값 형식이 요구한 대로 작성되었는지 검사
+            // 암호의 값 형식이 요구한 대로 작성되었는지 검사
+            // 정규표현식(Regular Expression)
+            var checkId = '/^[a-z][A-Za-z\d]{1,14)/';
+            if(checkId.test(('#userid').val())){
+                return true;
+            } else {
+                alert('아이디는 알파벳 소문자로 시작하여야 하며 숫자 혹은 영문자로만 구성될 수 있습니다(최대크기 15글자)');
+                return false;
+            }
+            return true; //전송보냄
+        }
+    </script>
+</head>
+
+<body>
+    <h1 align="center">회원 가입 페이지</h1>
+    <br>
+    <!-- 모든 서블릿은 Root(Webapp)에서 시작 -->
+    <!-- 이벤트에 return false를 하면 이벤트가 취소된다 -->
+    <!-- 아래 validate function은 반드시 return value == true일때만 작동한다 -->
+    <form action="/first/enroll" method="post" onsubmit="return validate();">
+        <table id="outer" align="center" width="500" cellspacing="5" cellpadding="0">
+            <tr>
+                <th colspan="2">회원 정보를 입력해주세요 (*표시는 필수입렵 항목입니다)</th>
+            </tr>
+            <tr>
+                <th width="120">*아이디</th>
+                <td><input type="text" name="userid" id="userid" required> &nbsp;
+                    <input type="button" value="중복체크" onclick="return dupIDCheck()">
+                </td>
+            </tr>
+            <tr>
+                <th>*암호</th>
+                <td><input type="password" name="userpwd" id="userpwd" required></td>
+            </tr>
+            <tr>
+                <th>*암호확인</th>
+                <td><input type="password" name="userpwd2" id="userpwd2" required></td>
+            </tr>
+            <tr>
+                <th>*이름</th>
+                <td><input type="text" name="username" required></td>
+            </tr>
+            <tr>
+                <th>*성별</th>
+                <td>
+                    <input type="radio" name="gender" value="M"> 남자 &nbsp;
+                    <input type="radio" name="gender" value="F"> 여자
+                </td>
+            </tr>
+            <tr>
+                <th>*나이</th>
+                <td><input type="number" name="age" min="19" value="20" required></td>
+            </tr>
+            <tr>
+                <th>*전화번호</th>
+                <td><input type="tel" name="phone" required></td>
+            </tr>
+            <tr>
+                <th>*이메일</th>
+                <td><input type="email" name="email" required></td>
+            </tr>
+            <tr>
+                <th>취미(연습용)</th>
+                <td>
+                    <table width="350">
+                        <tr>
+                            <td><input type="checkbox" name="hobby" value="game">게임</td>
+                            <td><input type="checkbox" name="hobby" value="sex">섹스</td>
+                            <td><input type="checkbox" name="hobby" value="lecture">독서</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="hobby" value="sport">운동</td>
+                            <td><input type="checkbox" name="hobby" value="music">음악</td>
+                            <td><input type="checkbox" name="hobby" value="movie">영화</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="hobby" value="travel">여행</td>
+                            <td><input type="checkbox" name="hobby" value="cook">요리</td>
+                            <td><input type="checkbox" name="hobby" value="etx" checked>기타</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <th>기타정보</th>
+                <td><textarea name="etc" cols="50" rows="3"></textarea></td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" value="가입하기"> &nbsp;
+                    <input type="reset" value="작성취소"> &nbsp;
+                    <a href="/first/index.jsp">시작페이지로 이동</a>
+                </th>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>
